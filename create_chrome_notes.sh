@@ -102,7 +102,9 @@ collect_tabs() {
     fi
     
     print_success "Collected $tab_count tabs"
-    return $tab_count
+    # Don't return the tab count as exit code, as non-zero values will cause script to exit with set -e
+    TAB_COUNT=$tab_count
+    return 0
 }
 
 # Function to categorize with Claude
@@ -246,7 +248,7 @@ main() {
     
     # Collect tabs
     collect_tabs
-    TAB_COUNT=$?
+    # TAB_COUNT is now set as a global variable in collect_tabs function
     
     # Determine categorization method
     if [ -n "$FORCE_METHOD" ]; then
