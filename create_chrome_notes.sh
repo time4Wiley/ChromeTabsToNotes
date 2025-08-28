@@ -86,7 +86,7 @@ detect_categorizer() {
 collect_tabs() {
     print_status "🔍 Collecting Chrome tabs..."
     
-    osascript "$SCRIPT_DIR/collect_chrome_tabs.applescript" > "$TABS_FILE"
+    "$SCRIPT_DIR/collect_chrome_tabs.applescript" > "$TABS_FILE"
     
     if [ $? -ne 0 ] || [ ! -s "$TABS_FILE" ]; then
         print_error "Failed to collect Chrome tabs"

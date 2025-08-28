@@ -32,10 +32,19 @@ on run
 end run
 
 on escapeQuotes(str)
-    set AppleScript's text item delimiters to "\""
+    -- First escape backslashes
+    set AppleScript's text item delimiters to "\\"
     set parts to text items of str
+    set AppleScript's text item delimiters to "\\\\"
+    set escaped to parts as text
+    
+    -- Then escape quotes
+    set AppleScript's text item delimiters to "\""
+    set parts to text items of escaped
     set AppleScript's text item delimiters to "\\\""
     set escaped to parts as text
+    
+    -- Reset delimiter
     set AppleScript's text item delimiters to ""
     return escaped
 end escapeQuotes
